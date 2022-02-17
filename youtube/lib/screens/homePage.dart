@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube/api.dart';
+import 'package:youtube/apiYouTube.dart';
 import 'package:youtube/models/video.dart';
 import 'package:youtube/widgets/youtubeAppBar.dart';
 
@@ -11,7 +11,7 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
-  Api api = new Api();
+  ApiYouTube api = new ApiYouTube();
   List<Video> videoList = [];
   TextEditingController _searchController = TextEditingController();
 

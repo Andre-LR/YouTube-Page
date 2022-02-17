@@ -8,7 +8,7 @@ import 'models/video.dart';
 const CHAVE_YOUTUBE_API = 'AIzaSyBIE1BW5_IUbb167uuCAKGlhgIRRSItS6c';
 
 
-class Api {
+class ApiYouTube {
   YoutubeAPI YT_API = YoutubeAPI(CHAVE_YOUTUBE_API);
   List<YouTubeVideo> videoResults = []; //Armazena os videos "brutos" com  todos os dados vindos direto da API
   List<Video> videoList = []; //Armazena os videos criados com a classe
@@ -37,9 +37,9 @@ Duração: ${video.duration}
     }
   }
 
-  trends() async {
+  Future<List<YouTubeVideo>> trends() async {
     String _regionCode = "BR";
 
-    videoResults = await YT_API.getTrends(regionCode: _regionCode);
+    return videoResults = await YT_API.getTrends(regionCode: _regionCode);
   }
 }

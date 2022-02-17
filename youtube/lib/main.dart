@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube/apiYouTube.dart';
 import 'screens/homePage.dart';
 import 'screens/subscriptions.dart';
 import 'screens/trending.dart';
@@ -19,7 +20,8 @@ class mainPage extends StatefulWidget {
 }
 
 class _mainPageState extends State<mainPage> {
-  
+  ApiYouTube api = new ApiYouTube();
+
   List<Widget> paginas = [
     homePage(),
     trending(),
@@ -34,9 +36,9 @@ class _mainPageState extends State<mainPage> {
     return Scaffold(
       appBar: YoutubeAppBar(),
       body: Container(
-        child: Center(
-          child: paginas[_indexAtual]
-        ),
+        padding: EdgeInsets.all(16),
+        child: paginas[_indexAtual],
+        
       ),
       bottomNavigationBar: BottomNavigationBar(
         //indice selecionado
