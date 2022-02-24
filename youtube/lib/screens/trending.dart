@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube/apiYouTube.dart';
-import 'package:youtube/widgets/youtubeAppBar.dart';
+import 'package:youtube/widgets/search.dart';
 import 'package:youtube_api/youtube_api.dart';
 
 class trending extends StatefulWidget {

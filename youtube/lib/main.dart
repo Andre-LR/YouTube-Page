@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:youtube/apiYouTube.dart';
-import 'screens/homePage.dart';
+import 'screens/inicio.dart';
 import 'screens/subscriptions.dart';
 import 'screens/trending.dart';
 import 'screens/userLibrary.dart';
-import 'widgets/youtubeAppBar.dart';
+import 'widgets/search.dart';
 
 void main() {
   runApp(MaterialApp(
     home: mainPage(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
@@ -21,24 +22,57 @@ class mainPage extends StatefulWidget {
 
 class _mainPageState extends State<mainPage> {
   ApiYouTube api = new ApiYouTube();
-
-  List<Widget> paginas = [
-    homePage(),
-    trending(),
-    subscriptions(),
-    userLibrary(),
-  ];
-
+  String _searchResult = "";
   int _indexAtual = 0;
+
 
   @override
   Widget build(BuildContext context) {
+    //Lista para fazer a troca entre as screens ao seleciona-las no bottomNavigationbar
+    List<Widget> paginas = [
+    inicio(_searchResult),
+    trending(),
+    subscriptions(),
+    userLibrary(),
+    ];
+
     return Scaffold(
-      appBar: YoutubeAppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.grey[600],
+        ),
+        title: Image.asset(
+          "assets/images/youtube.png",
+          width: 100,
+        ),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.videocam),
+              onPressed: () {
+                print("Press: VideoCam");
+              }),
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () async {
+                //Recebe a query pesquisada pelo usuário
+                String? queryPesquisada =
+                    await showSearch(context: context, delegate: Search());
+
+                setState(() {
+                  _searchResult = queryPesquisada!;
+                });
+              }),
+          IconButton(
+              icon: Icon(Icons.account_circle),
+              onPressed: () {
+                print("Press: Account");
+              }),
+        ],
+      ),
       body: Container(
         padding: EdgeInsets.all(16),
         child: paginas[_indexAtual],
-        
       ),
       bottomNavigationBar: BottomNavigationBar(
         //indice selecionado

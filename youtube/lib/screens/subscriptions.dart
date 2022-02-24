@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube/widgets/youtubeAppBar.dart';
+import 'package:youtube/widgets/search.dart';
 
 class subscriptions extends StatefulWidget {
   const subscriptions({Key? key}) : super(key: key);

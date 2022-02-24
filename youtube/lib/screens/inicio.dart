@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:youtube/apiYouTube.dart';
-import 'package:youtube/models/video.dart';
-import 'package:youtube/widgets/youtubeAppBar.dart';
+import 'package:youtube/widgets/search.dart';
 import 'package:youtube_api/youtube_api.dart';
 
-class homePage extends StatefulWidget {
-  const homePage({Key? key}) : super(key: key);
+class inicio extends StatefulWidget {
+  //Parametro usado para pesquisa
+  String pesquisa = "";
+  inicio(this.pesquisa);
 
   @override
-  _homePageState createState() => _homePageState();
+  _inicioState createState() => _inicioState();
 }
 
-class _homePageState extends State<homePage> {
+class _inicioState extends State<inicio> {
   Future<List<YouTubeVideo>> getVideos() async {
     ApiYouTube api = new ApiYouTube();
-    Future<List<YouTubeVideo>> videosResults = api.searchVideo("");
+    //Pesquisa videos com a query pesquisada na barra de search
+    Future<List<YouTubeVideo>> videosResults = api.searchVideo(widget.pesquisa);
     return videosResults;
   }
 
@@ -89,10 +91,8 @@ class _homePageState extends State<homePage> {
                             title: Text(video.title),
                             subtitle: Text(video.channelTitle),
                           )
-
                         ],
-                      )
-                    );
+                      ));
                 },
               );
             } else {
